@@ -1,45 +1,24 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.UserDto;
-import com.example.demo.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
+import com.example.demo.dto.GoodsDto;
+import com.example.demo.service.GoodsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Value;
 
-import java.util.Map;
-
-/**
- * packageName    : com.example.demo.controller
- * fileName       : UserRestController
- * author         : doong2s
- * date           : 2025. 1. 12.
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2025. 1. 12.        doong2s       최초 생성
- */
 @RestController
-@RequestMapping("/api/v1/user")
-public class UserRestController {
+//@RequestMapping("/api/v1/goods")
+public class GoodsController {
+    private final GoodsService goodsService;
 
-    @Autowired
-    private UserService userService;
+    public GoodsController(GoodsService goodsService) {
+        this.goodsService = goodsService;
+    }
 
-
-    @GetMapping("/{userNo}")
-    public ResponseEntity<?> getUserByuserNo(@PathVariable int userNo) {
-        Map<String, Object> user = userService.getUserByuserNo(userNo);
-        
-        if (user != null){
-            return ResponseEntity.ok(user);
-        }
-        else {
-            return ResponseEntity.status(404).body("user not found");
-        }
+    @GetMapping("/api/v1/goods/{goodsNo}")
+    public GoodsDto getGoods(@PathVariable String goodsNo) {
+        return goodsService.getGoodsByNo(goodsNo);
     }
 }

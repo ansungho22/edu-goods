@@ -1,3 +1,11 @@
 spring.application.name: demo
 
-app.run.type: prod
+app.run.type: default
+
+goods:
+  1:
+    goodsNo: "1"
+    goodsName: "Product A"
+  2:
+    goodsNo: "2"
+    goodsName: "Product B"
