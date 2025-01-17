@@ -21,4 +21,9 @@ public class GoodsController {
     public GoodsDto getGoods(@PathVariable String goodsNo) {
         return goodsService.getGoodsByNo(goodsNo);
     }
+
+    @GetMapping("/")
+    public String healthCheck() {
+        return "ok";
+    }
 }
