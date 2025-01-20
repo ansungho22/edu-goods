@@ -1,0 +1,114 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: edu-goods-config
+  namespace: edu-goods
+data:
+  application.yaml: |
+    # Edu Goods Application Configuration
+    test:
+      goods:
+        1:
+          goodsNo: "1"
+          goodsName: "Product A"
+        2:
+          goodsNo: "2"
+          goodsName: "Product B"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edu-goods-deploy
+  namespace: edu-goods
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: edu-goods
+  template:
+    metadata:
+      labels:
+        app: edu-goods
+    spec:
+      containers:
+      - name: edu-goods
+        image: ansungho22/edu-goods:v0.0.1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:                           # pod 사용 리소스 설정 블록
+            requests:                          # 생성시 필요한 최소 리소스 
+              cpu: "1"
+              memory: "2Gi"
+            limits:                            # pod가 사용 가능한 최대 리소스 
+              cpu: "1"
+              memory: "2Gi"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 5
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      imagePullSecrets:                         
+        - name: k8s-edu-dockerhub-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: edu-goods-svc
+  namespace: edu-goods
+spec:
+  selector:
+    app: edu-goods
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: edu-goods-ingress
+  namespace: edu-goods
+spec:
+  rules:
+  - host: "edu-goods.211.254.213.36.sslip.io"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: edu-goods-svc
+            port:
+              number: 80
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: edu-goods-hpa
+  namespace: edu-goods
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: edu-goods-deploy
+  minReplicas: 2
+  maxReplicas: 3
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 30
