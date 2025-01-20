@@ -5,7 +5,6 @@ metadata:
   namespace: edu-goods
 data:
   application.yaml: |
-    # Edu Goods Application Configuration
     test:
       goods:
         1:
