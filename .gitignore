@@ -40,3 +40,27 @@ out/
 /logs/
 
 /attacheFiles/
+
+
+
+buildOutputCleanup.lock
+checksums.lock
+demo.main.iml
+DemoApplication.class
+executionHistory.bin
+executionHistory.lock
+file-system.probe
+fileHashes.bin
+fileHashes.lock
+GoodsController.class
+GoodsDto.class
+GoodsProperties$Goods.class
+GoodsProperties.class
+GoodsService.class
+md5-checksums.bin
+misc.xml
+modules.xml
+previous-compilation-data.bin
+problems-report.html
+resourceHashesCache.bin
+sha1-checksums.bin
