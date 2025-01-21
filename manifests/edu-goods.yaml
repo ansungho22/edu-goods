@@ -57,7 +57,7 @@ spec:
           initialDelaySeconds: 60
           periodSeconds: 5
         volumeMounts:
-          - name: application-properties
+          - name: edu-goods-config
             mountPath: /workspace/config
             readOnly: true
       volumes:
