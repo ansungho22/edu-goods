@@ -5,15 +5,14 @@ metadata:
   namespace: edu-goods
 data:
   application.yaml: |
-    # Edu Goods Application Configuration
     test:
       goods:
         1:
           goodsNo: "1"
-          goodsName: "Product A"
+          goodsName: "Product AAA"
         2:
           goodsNo: "2"
-          goodsName: "Product B"
+          goodsName: "Product BBB"
 ---
 apiVersion: apps/v1
 kind: Deployment
