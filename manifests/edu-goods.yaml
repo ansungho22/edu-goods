@@ -56,6 +56,10 @@ spec:
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 5
+        volumeMounts:
+          - name: application-properties
+            mountPath: /workspace/config
+            readOnly: true
       volumes:
         - name: edu-goods-config
           configMap:
