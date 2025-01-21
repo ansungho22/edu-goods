@@ -15,6 +15,6 @@ test:
 
 spring:
   datasource:
-    hostip: ${DB_HOST}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    hostip: ${hostip}
+    username: ${username}
+    password: ${password}
