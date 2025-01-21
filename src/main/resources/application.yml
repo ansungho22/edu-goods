@@ -3,11 +3,18 @@
 app.run.type: default
 
 
-#test:
-#  goods:
-#    1:
-#      goodsNo: "1"
-#      goodsName: "Product A"
-#    2:
-#      goodsNo: "2"
-#      goodsName: "Product B"
+test:
+ goods:
+   1:
+     goodsNo: "1"
+     goodsName: "Product A"
+   2:
+     goodsNo: "2"
+     goodsName: "Product B"
+
+
+spring:
+  datasource:
+    hostip: ${DB_HOST}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}

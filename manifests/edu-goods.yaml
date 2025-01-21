@@ -4,15 +4,9 @@ metadata:
   name: edu-goods-config
   namespace: edu-goods
 data:
-  application.yaml: |
-    test:
-      goods:
-        1:
-          goodsNo: "1"
-          goodsName: "Product AAA"
-        2:
-          goodsNo: "2"
-          goodsName: "Product BBB"
+    hostip: "test_ip"
+    username: "test_username"
+    password: "test_password"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -31,7 +25,7 @@ spec:
     spec:
       containers:
       - name: edu-goods
-        image: ansungho22/edu-goods:v0.0.2
+        image: ansungho22/edu-goods:v0.0.3
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -56,17 +50,22 @@ spec:
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 5
-        volumeMounts:
-          - name: edu-goods-config
-            mountPath: /workspace/config
-            readOnly: true
-      volumes:
-        - name: edu-goods-config
-          configMap:
-            name: edu-goods-config
-            items:
-              - key: "application.yaml"
-                path: "application.yaml"
+        env:
+          - name: hostip
+            valueFrom:
+              configMapKeyRef:
+                name: edu-goods-config
+                key: hostip
+          - name: username
+            valueFrom:
+              configMapKeyRef:
+                name: edu-goods-config
+                key: username
+          - name: password
+            valueFrom:
+              configMapKeyRef:
+                name: edu-goods-config
+                key: password
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       imagePullSecrets:                         
