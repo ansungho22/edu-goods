@@ -57,6 +57,13 @@ spec:
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 5
+      volumes:
+        - name: edu-goods-config
+          configMap:
+            name: edu-goods-config
+            items:
+              - key: "application.yaml"
+                path: "application.yaml"
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       imagePullSecrets:                         
