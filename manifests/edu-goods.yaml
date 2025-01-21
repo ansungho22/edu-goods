@@ -14,6 +14,7 @@ metadata:
   name: edu-goods-deploy
   namespace: edu-goods
 spec:
+  revisionHistoryLimit: 3
   replicas: 2
   selector:
     matchLabels:
