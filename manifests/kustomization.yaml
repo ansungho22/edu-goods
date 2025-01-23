@@ -4,6 +4,6 @@ resources:
 - edu-goods.yaml
 images:
 - name: ansungho22/edu-goods
-  newTag: "202501231417"
+  newTag: "202501231600"
 - name: ansungho22/edu-users
   newTag: "202501231335"
