@@ -7,10 +7,10 @@ test:
  goods:
    1:
      goodsNo: "1"
-     goodsName: "Product AAAA"
+     goodsName: "자동차"
    2:
      goodsNo: "2"
-     goodsName: "Product BBBA"
+     goodsName: "사과"
 
 
 spring:
