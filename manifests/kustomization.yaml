@@ -3,5 +3,7 @@ kind: Kustomization
 resources:
 - edu-goods.yaml
 images:
+- name: ansungho22/edu-goods
+  newTag: "202501231349"
 - name: ansungho22/edu-users
   newTag: "202501231335"
