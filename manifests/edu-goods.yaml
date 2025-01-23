@@ -4,9 +4,9 @@ metadata:
   name: edu-goods-config
   namespace: edu-goods
 data:
-    hostip: "test_ip_Goods"
+    hostip: "hostip"
     username: "test_username_Goods"
-    password: "test_password_Goods"
+    password: "password"
 ---
 apiVersion: apps/v1
 kind: Deployment
